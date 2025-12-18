@@ -27,23 +27,9 @@ jobs:
       - name: Run Playwright Tests
         run: npx playwright test
 
-      # 5️⃣ Run AI Review (optional)
-      - name: AI Review
-        run: node ai_review.js
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      # 6️⃣ Upload screenshots for record / AI review
+      # 5 Upload screenshots for record / AI review
       - name: Upload Screenshots
         uses: actions/upload-artifact@v3
         with:
           name: screenshots
           path: screenshots/
-
-      # 7️⃣ Upload AI summary (optional)
-      - name: Upload AI Report
-        if: success() && (exists('reports/ai_summary.json'))
-        uses: actions/upload-artifact@v3
-        with:
-          name: ai-summary
-          path: reports/ai_summary.json
