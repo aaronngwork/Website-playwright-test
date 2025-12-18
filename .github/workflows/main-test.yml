@@ -1,0 +1,39 @@
+name: AI Webflow Test
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-ai-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Run Playwright tests
+      - name: Run Playwright Tests
+        run: npx playwright test
+
+  
+
+      # 6️⃣ Upload screenshots for record / AI review
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots
+          path: screenshots/
+
+  
